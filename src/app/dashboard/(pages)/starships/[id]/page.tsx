@@ -15,11 +15,8 @@ const fetchData = async (id: string) => {
 console.log("baseUrl:", baseUrl);
 
 
-interface PageProps {
-  params: { id: string }
-}
 
-const Page = async ({ params }: PageProps) => {
+const Page = async ({ params }: any) => {
   const { id } = params;
   const data = await fetchData(id);
   return (
