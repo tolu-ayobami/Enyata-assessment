@@ -35,11 +35,6 @@ const Header = ({ isOpen, setIsOpen }: DashboardHeaderProps) => {
     const [darkMode, setDarkMode] = useState(false);
 
     useEffect(() => {
-        const theme = localStorage.getItem("theme");
-        if (theme === "dark") setDarkMode(true);
-    }, []);
-
-    useEffect(() => {
         const root = window.document.documentElement;
         if (darkMode) {
             root.classList.add("dark");
@@ -73,7 +68,7 @@ const Header = ({ isOpen, setIsOpen }: DashboardHeaderProps) => {
                     <div className='cursor-pointer' onClick={() => setDarkMode(!darkMode)}>
                         {darkMode ? <HiSun className='text-[20px]' /> : <HiMoon className='text-[20px]' />}
                     </div>
-                    <div className='flex items-center gap-[20px] '>
+                    <div className='flex items-center gap-[20px]'>
                         {data.map((map, index) => (
                             <div key={index} className={` ${index === 1 ? "w-[1px]" : ""} ${index === 0 ? "w-[20px]" : ""} `}>
                                 <Headeritem key={index} {...map} />

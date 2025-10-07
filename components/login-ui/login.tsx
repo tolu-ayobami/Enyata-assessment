@@ -23,10 +23,11 @@ type FormData = z.infer<typeof schema>;
 
 const Login = () => {
 
-   const { register, handleSubmit, formState: { errors, isValid, isSubmitting }, reset } = useForm<FormData>({
-    resolver: zodResolver(schema),
-    mode: "all", // or "onTouched"
-});
+    const { register, handleSubmit, formState: { errors, isValid, isSubmitting }, reset } = useForm<FormData>({
+        resolver: zodResolver(schema),
+        mode: "all", // or "onTouched"
+        //mode:"onChange"
+    });
 
     const router = useRouter()
 
@@ -39,11 +40,12 @@ const Login = () => {
 
 
     const onSubmit = async (data: FormData) => {
-    // Simulate async login
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    router.push('/dashboard');
-    reset();
-};
+        console.log(data)
+        // Simulate async login
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+        router.push('/dashboard');
+        reset();
+    };
 
     return (
         <div className='flex items-center min-h-screen justify-center'>
@@ -93,7 +95,7 @@ const Login = () => {
                             </div>
                             {errors.password && <span className='text-red-500 text-sm py-0'>{errors.password.message}</span>}
                         </div>
-                        <button type='submit' disabled={!isValid || isSubmitting} className={`w-full cursor-pointer h-[48px] bg-[#0A74DC] text-white rounded-[6px] ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}>{isSubmitting ? <ClipLoader size={24} color="#ffffff" /> : "Login"}</button>
+                        <button type='submit' disabled={!isValid || isSubmitting} className={`w-full cursor-pointer h-[48px] bg-[#0A74DC] text-white rounded-[6px] ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''} ${!isValid ? 'opacity-50 cursor-not-allowed' : ''}`}>{isSubmitting ? <ClipLoader size={24} color="#ffffff" /> : "Login"}</button>
                         <p className='text-[14px] text-center leading-[16px] font-normal font-inter text-[#0A74DC]'>Forgot your password?</p>
                     </form>
 
